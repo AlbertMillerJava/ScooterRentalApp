@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,11 +31,11 @@ public class Scooter {
     private DockStation dockStation;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_account_id", referencedColumnName = "id")
     @ToString.Exclude
     private UserAccount userAccount;
 
-    @OneToOne(mappedBy = "scooter")
-    private Rental rental;
+    @OneToMany(mappedBy = "scooter")
+    private List<Rental> rentals;
 }

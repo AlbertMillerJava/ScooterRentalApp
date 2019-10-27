@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -30,8 +31,8 @@ public class UserAccount {
     @OneToOne(mappedBy = "userAccount")
     private Scooter scooter;
 
-    @OneToOne(mappedBy = "userAccount")
-    private Rental rental;
+    @OneToMany(mappedBy = "userAccount")
+    private List<Rental> rentals;
 
     public UserAccount(Long id,
                        String userName,

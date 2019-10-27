@@ -16,9 +16,11 @@ public class Rental {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    private LocalDateTime start;
 
+    private LocalDateTime end;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_account_id",referencedColumnName = "id")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -26,7 +28,7 @@ public class Rental {
 
 
     @ToString.Exclude
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="scooter_id",referencedColumnName = "id")
     @EqualsAndHashCode.Exclude
     private Scooter scooter;
