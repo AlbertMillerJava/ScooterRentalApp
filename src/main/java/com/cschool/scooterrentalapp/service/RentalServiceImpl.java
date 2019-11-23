@@ -12,6 +12,7 @@ import com.cschool.scooterrentalapp.domain.repository.ScooterRepository;
 import com.cschool.scooterrentalapp.domain.repository.UserRepository;
 import com.cschool.scooterrentalapp.exception.CommonBadRequestException;
 import com.cschool.scooterrentalapp.exception.CommonConflictException;
+import com.cschool.scooterrentalapp.service.interfaces.RentalService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

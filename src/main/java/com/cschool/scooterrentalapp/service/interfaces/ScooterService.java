@@ -1,4 +1,4 @@
-package com.cschool.scooterrentalapp.service;
+package com.cschool.scooterrentalapp.service.interfaces;
 
 import com.cschool.scooterrentalapp.api.request.AddScooterRequest;
 import com.cschool.scooterrentalapp.api.response.AddScooterResponse;

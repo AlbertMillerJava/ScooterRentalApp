@@ -11,8 +11,10 @@ import com.cschool.scooterrentalapp.domain.model.UserAccount;
 import com.cschool.scooterrentalapp.domain.repository.UserRepository;
 import com.cschool.scooterrentalapp.exception.CommonBadRequestException;
 import com.cschool.scooterrentalapp.exception.CommonConflictException;
+import com.cschool.scooterrentalapp.service.interfaces.UserAccountService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,11 +32,14 @@ public class UserAccountServiceImpl extends AbstractCommonService implements Use
 
     private UserRepository userRepository;
 
-
+    @Autowired
     public UserAccountServiceImpl(MsgSource msgSource, UserRepository userRepository) {
         super(msgSource);
         this.userRepository = userRepository;
     }
+
+
+
 
     @Override
     @Transactional

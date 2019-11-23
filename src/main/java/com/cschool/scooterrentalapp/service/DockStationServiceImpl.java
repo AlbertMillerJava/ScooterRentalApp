@@ -7,6 +7,7 @@ import com.cschool.scooterrentalapp.domain.model.DockStation;
 import com.cschool.scooterrentalapp.domain.model.Scooter;
 import com.cschool.scooterrentalapp.domain.repository.DockStationRepository;
 import com.cschool.scooterrentalapp.exception.CommonConflictException;
+import com.cschool.scooterrentalapp.service.interfaces.DockStationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

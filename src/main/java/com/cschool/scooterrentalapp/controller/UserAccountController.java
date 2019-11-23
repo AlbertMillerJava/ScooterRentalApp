@@ -4,7 +4,7 @@ import com.cschool.scooterrentalapp.api.request.CreateUserAccountRequest;
 import com.cschool.scooterrentalapp.api.response.BasicResponse;
 import com.cschool.scooterrentalapp.api.response.CreateUserAccountResponse;
 import com.cschool.scooterrentalapp.api.response.UserInfoResponse;
-import com.cschool.scooterrentalapp.service.UserAccountService;
+import com.cschool.scooterrentalapp.service.interfaces.UserAccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

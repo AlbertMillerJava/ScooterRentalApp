@@ -1,4 +1,4 @@
-package com.cschool.scooterrentalapp.service;
+package com.cschool.scooterrentalapp.service.interfaces;
 
 import com.cschool.scooterrentalapp.api.request.CreateUserAccountRequest;
 import com.cschool.scooterrentalapp.api.response.BasicResponse;
@@ -7,7 +7,9 @@ import com.cschool.scooterrentalapp.api.response.UserInfoResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface UserAccountService {
+
     ResponseEntity<CreateUserAccountResponse> createUserAccount(CreateUserAccountRequest request);
+
     ResponseEntity<BasicResponse> rechargeUserAccount( Long userId, String amount);
 
     ResponseEntity<UserInfoResponse> ifUserHasScooter(String email);

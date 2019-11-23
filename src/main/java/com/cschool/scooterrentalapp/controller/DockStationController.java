@@ -3,7 +3,7 @@ package com.cschool.scooterrentalapp.controller;
 import com.cschool.scooterrentalapp.api.request.AddDockStationRequest;
 import com.cschool.scooterrentalapp.api.response.BasicResponse;
 import com.cschool.scooterrentalapp.domain.model.Scooter;
-import com.cschool.scooterrentalapp.service.DockStationService;
+import com.cschool.scooterrentalapp.service.interfaces.DockStationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

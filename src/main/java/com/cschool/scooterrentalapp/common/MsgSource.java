@@ -1,9 +1,11 @@
 package com.cschool.scooterrentalapp.common;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
+
 public class MsgSource {
     public final String OK001;
     public final String OK002;

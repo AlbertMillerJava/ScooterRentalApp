@@ -1,0 +1,51 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+<!--       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jpa="http://www.springframework.org/schema/data/jpa"-->
+<!--       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd-->
+<!--		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">-->
+
+<!--    <jpa:repositories base-package="com.cschool.scooterrentalapp.domain.repository" repository-impl-postfix="Repository"/>-->
+<!--    <bean id= "msgSource" class="com.cschool.scooterrentalapp.common.MsgSource">-->
+<!--        <constructor-arg index="0" value=""/>-->
+<!--        <constructor-arg index="1" value=""/>-->
+<!--        <constructor-arg index="2" value=""/>-->
+<!--        <constructor-arg index="3" value=""/>-->
+<!--        <constructor-arg index="4" value=""/>-->
+<!--        <constructor-arg index="5" value=""/>-->
+<!--        <constructor-arg index="6" value=""/>-->
+<!--        <constructor-arg index="7" value=""/>-->
+<!--        <constructor-arg index="8" value=""/>-->
+<!--        <constructor-arg index="9" value=""/>-->
+<!--        <constructor-arg index="10" value=""/>-->
+<!--        <constructor-arg index="11" value=""/>-->
+<!--        <constructor-arg index="12" value=""/>-->
+<!--        <constructor-arg index="13" value=""/>-->
+<!--        <constructor-arg index="14" value=""/>-->
+<!--        <constructor-arg index="15" value=""/>-->
+<!--        <constructor-arg index="16" value=""/>-->
+<!--        <constructor-arg index="17" value=""/>-->
+<!--        <constructor-arg index="18" value=""/>-->
+<!--        <constructor-arg index="19" value=""/>-->
+<!--        <constructor-arg index="20" value=""/>-->
+<!--        <constructor-arg index="21" value=""/>-->
+<!--        <constructor-arg index="22" value=""/>-->
+<!--    </bean>-->
+<!--    <bean id="userRepository" class="com.cschool.scooterrentalapp.domain.repository.UserRepository"/>-->
+<!--    <bean id="userAccountService" class="com.cschool.scooterrentalapp.service.UserAccountServiceImpl">-->
+<!--        <constructor-arg index="0" ref="msgSource"/>-->
+<!--        <constructor-arg index="1" ref="userRepository"/>-->
+<!--    </bean>-->
+<!--    <bean id="userAccountAspect" class="com.cschool.scooterrentalapp.aspect.UserAccountAspect"/>-->
+<!--    <aop:aspectj-autoproxy proxy-target-class="true"/>-->
+<!--    <aop:config>-->
+
+
+<!--        <aop:aspect id="aspects" ref="userAccountAspect">-->
+<!--            <aop:pointcut id="pointCutAfterReturning" expression=-->
+<!--                    "execution(* com.cschool.scooterrentalapp.service.UserAccountServiceImpl.createUserAccount(..))"/>-->
+<!--            <aop:after-returning method="afterUserAccountCreated"-->
+<!--                                 returning="joinPoint" pointcut-ref="pointCutAfterReturning"/>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+<!--</beans>-->

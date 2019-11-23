@@ -2,7 +2,7 @@ package com.cschool.scooterrentalapp.controller;
 
 import com.cschool.scooterrentalapp.api.response.BasicResponse;
 import com.cschool.scooterrentalapp.domain.model.Rental;
-import com.cschool.scooterrentalapp.service.RentalService;
+import com.cschool.scooterrentalapp.service.interfaces.RentalService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +32,7 @@ public class RentalController {
         return rentalService.cancelRental( accountId, dockStationId);
     }
 
-    @GetMapping(value = "getAllRentals", produces = "application/json")
+    @GetMapping(value = "/getAllRentals", produces = "application/json")
     public List<Rental> getAllRentals(){
         return rentalService.getAllRentals();
     }
