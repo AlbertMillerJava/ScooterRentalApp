@@ -29,10 +29,10 @@ public class UserAccountAspect {
 
             Object[] args = proceedingJoinPoint.getArgs();
             long userId = (long) args[0];
+            String amount = (String) args[1];
+            proceedingJoinPoint.proceed(args);
 
-            String amount = (String) proceedingJoinPoint.proceed(args);
-
-            logger.info("user with id ={} recharged his account with amount ={} ", userId, amount);
+            logger.info("user with id ={} recharged his account with amount = {}  ", userId, amount);
         } catch (Throwable e){
 
         }
