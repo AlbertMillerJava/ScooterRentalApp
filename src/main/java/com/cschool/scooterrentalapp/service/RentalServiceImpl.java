@@ -76,16 +76,16 @@ public class RentalServiceImpl extends AbstractCommonService implements RentalSe
         return rentalRepository.findAll();
     }
 
-    private void startRental(Scooter scooter, UserAccount userAccount){
-        Rental rental = new Rental();
-        rental.setScooter(scooter);
-        rental.setUserAccount(userAccount);
-        rental.setStart(LocalDateTime.now());
-        rentalRepository.save(rental);
+    private void startRental(Scooter scooter, UserAccount userAccount) {
+        rentalRepository.save(Rental.builder()
+                .scooter(scooter)
+                .userAccount(userAccount)
+                .rentalStart(LocalDateTime.now())
+                .build());
     }
 
     private void endRental(Rental rental){
-        rental.setEnd(LocalDateTime.now());
+        rental.setRentalEnd(LocalDateTime.now());
         rentalRepository.save(rental);
     }
 
@@ -97,6 +97,7 @@ public class RentalServiceImpl extends AbstractCommonService implements RentalSe
 
     private void cancelScooterRental(UserAccount userAccount, Scooter scooter, DockStation dockStation) {
         scooter.setDockStation(dockStation);
+        scooter.setUserAccount(null);
         userAccount.setScooter(null);
         scooterRepository.save(scooter);
     }

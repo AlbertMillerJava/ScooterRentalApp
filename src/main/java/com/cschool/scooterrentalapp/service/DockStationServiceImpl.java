@@ -6,7 +6,6 @@ import com.cschool.scooterrentalapp.common.MsgSource;
 import com.cschool.scooterrentalapp.domain.model.DockStation;
 import com.cschool.scooterrentalapp.domain.model.Scooter;
 import com.cschool.scooterrentalapp.domain.repository.DockStationRepository;
-import com.cschool.scooterrentalapp.domain.repository.DockStationRepository;
 import com.cschool.scooterrentalapp.exception.CommonConflictException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -27,10 +26,10 @@ public class DockStationServiceImpl extends AbstractCommonService implements Doc
     @Override
     @Transactional
     public ResponseEntity<BasicResponse> addNewDockStation(AddDockStationRequest request) {
-
-        DockStation dockStation = new DockStation();
-        dockStation.setAvailablePlace(request.getAvailablePlace());
-        dockStation.setDockName(request.getDockName());
+        DockStation dockStation = DockStation.builder()
+                .availablePlace(request.getAvailablePlace())
+                .dockName(request.getDockName())
+                .build();
         dockStationRepository.save(dockStation);
         return ResponseEntity.ok(new BasicResponse(msgSource.OK009, dockStation.toString()));
     }

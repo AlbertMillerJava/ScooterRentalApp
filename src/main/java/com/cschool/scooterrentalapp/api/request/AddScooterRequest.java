@@ -2,7 +2,6 @@ package com.cschool.scooterrentalapp.api.request;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
 
 @Data
 public class AddScooterRequest {

@@ -1,11 +1,10 @@
 package com.cschool.scooterrentalapp.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
+@Builder
 @Data
 @Entity
 @AllArgsConstructor
@@ -16,21 +15,16 @@ public class Rental {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private LocalDateTime start;
+    private LocalDateTime rentalStart;
 
-    private LocalDateTime end;
+    private LocalDateTime rentalEnd;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_account_id",referencedColumnName = "id")
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "user_account_id")
     private UserAccount userAccount;
 
-
-    @ToString.Exclude
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="scooter_id",referencedColumnName = "id")
-    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name ="scooter_id")
     private Scooter scooter;
 
 

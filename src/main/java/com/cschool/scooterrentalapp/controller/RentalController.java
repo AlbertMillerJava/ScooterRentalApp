@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -26,7 +25,7 @@ public class RentalController {
     }
 
 
-    @PutMapping(value = "/return", produces = "application/json")
+    @PutMapping(value = "/cancel", produces = "application/json")
     public ResponseEntity<BasicResponse> cancelRental(
             @RequestParam Long accountId,
             @RequestParam Long dockStationId){

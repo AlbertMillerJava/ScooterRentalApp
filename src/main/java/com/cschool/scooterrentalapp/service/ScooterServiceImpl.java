@@ -13,7 +13,6 @@ import com.cschool.scooterrentalapp.exception.CommonConflictException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -59,12 +58,12 @@ public class ScooterServiceImpl extends AbstractCommonService implements Scooter
     }
 
     private Scooter addScooterToDatasource(AddScooterRequest request, DockStation dockStation){
-        Scooter scooter = new Scooter();
-        scooter.setModelName(request.getModelName());
-        scooter.setMaxSpeed(request.getMaxSpeed());
-        scooter.setPrice(new BigDecimal(request.getRentalPrice()));
-        scooter.setDockStation(dockStation);
-        return scooterRepository.save(scooter);
+        return scooterRepository.save(Scooter.builder()
+                .modelName(request.getModelName())
+                .dockStation(dockStation)
+                .maxSpeed(request.getMaxSpeed())
+                .price(new BigDecimal(request.getRentalPrice()))
+                .build());
     }
 
     private void checkAvailablePlaceInDock(DockStation dockStation){

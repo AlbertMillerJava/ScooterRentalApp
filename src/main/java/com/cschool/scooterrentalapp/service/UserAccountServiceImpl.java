@@ -11,6 +11,8 @@ import com.cschool.scooterrentalapp.domain.model.UserAccount;
 import com.cschool.scooterrentalapp.domain.repository.UserRepository;
 import com.cschool.scooterrentalapp.exception.CommonBadRequestException;
 import com.cschool.scooterrentalapp.exception.CommonConflictException;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,13 +44,11 @@ public class UserAccountServiceImpl extends AbstractCommonService implements Use
             throw new CommonConflictException(msgSource.ERR002);
         }
         UserAccount newAccount = new UserAccount();
-        newAccount.setId(userAccount.getId());
-        newAccount.setUserName(userAccount.getUserName());
-        newAccount.setUserEmail(newEmail);
-        newAccount.setAge(userAccount.getAge());
-        newAccount.setAccountBalance(userAccount.getAccountBalance());
-        newAccount.setScooter(userAccount.getScooter());
-        newAccount.setCreateDate(userAccount.getCreateDate());
+        try{
+            BeanUtils.copyProperties(userAccount,newAccount);
+        } catch (BeansException e) {
+            e.printStackTrace();
+        }
         userRepository.delete(userAccount);
         userRepository.save(newAccount);
         return ResponseEntity.ok(BasicResponse.of(msgSource.OK007));
@@ -133,14 +133,15 @@ public class UserAccountServiceImpl extends AbstractCommonService implements Use
     }
 
     private UserAccount addUserAccountToDataSource(CreateUserAccountRequest request) {
-        UserAccount userAccount = new UserAccount(
-                null,
-                request.getOwnerUserName(),
-                request.getOwnerEmail(),
-                request.getOwnerAge(),
-                new BigDecimal(0.0),
-                LocalDateTime.now()
-        );
+        UserAccount userAccount = new UserAccount();
+        try{
+            BeanUtils.copyProperties(request,userAccount);
+        } catch (BeansException e) {
+            e.printStackTrace();
+        }
+        userAccount.setCreateDate(LocalDateTime.now());
+        userAccount.setId(null);
+        userAccount.setAccountBalance(new BigDecimal(0.0));
         return userRepository.save(userAccount);
     }
 

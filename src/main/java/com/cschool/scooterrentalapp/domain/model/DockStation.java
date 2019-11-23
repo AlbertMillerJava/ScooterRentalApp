@@ -1,15 +1,10 @@
 package com.cschool.scooterrentalapp.domain.model;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
-
+@Builder
 @Entity
 @Data
 public class DockStation {
