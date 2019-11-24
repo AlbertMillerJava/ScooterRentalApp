@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.ResultActions
 import spock.lang.Specification
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
@@ -32,16 +33,17 @@ class UserAccountControllerTest extends Specification {
         userRepository = Mock(UserRepository)
         userAccountService = new UserAccountServiceImpl(msgSource, userRepository)
         userAccountController = new UserAccountController(userAccountService)
-        mvc = standaloneSetup(new UserAccountController(userAccountService)).build()
+
+        mvc = standaloneSetup(new UserAccountController(userAccountService)).addFilter(({ request, response, chain ->
+            response.setCharacterEncoding("UTF-8")
+            chain.doFilter(request, response)
+        })).build()
     }
 
     def "When proper user Request is passed, should return 'Poprawnie utworzono użytkownika'"() {
         given:
-        def responseBody = "{" +
-                "\"responseMsg\":\"Poprawnie utworzono konto użytkownika.\"," +
-                "\"status\":\"SUCCESS\"," +
-                "\"accountId\":16" +
-                "}"
+
+        String responseBody = getResponseBody()
 
         def userRequest = new CreateUserAccountRequest()
         userRequest.setOwnerAge(5)
@@ -52,14 +54,28 @@ class UserAccountControllerTest extends Specification {
         newAccount.setId(16L)
 
         when:
-        def result = mvc.perform(post("/account-user/create").content(asJsonString(userRequest)).contentType(MediaType.APPLICATION_JSON))
+        ResultActions result = mvc.perform(post("/account-user/create").content(asJsonString(userRequest)).contentType(MediaType.APPLICATION_JSON))
 
         then:
         1 * userRepository.save(_ as UserAccount) >> newAccount
         1 * userRepository.findByUserEmail(userRequest.getOwnerEmail()) >> []
+
         and:
         result.andExpect(status().isOk())
         result.andReturn().getResponse().getContentAsString() == responseBody
+
+    }
+
+    def "When invalid email should return "() {
+
+    }
+
+    private String getResponseBody() {
+        return "{" +
+                "\"responseMsg\":\"Poprawnie utworzono konto użytkownika.\"," +
+                "\"status\":\"SUCCESS\"," +
+                "\"accountId\":16" +
+                "}"
 
     }
 

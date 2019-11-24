@@ -8,21 +8,11 @@ import com.cschool.scooterrentalapp.domain.repository.ScooterRepository
 import com.cschool.scooterrentalapp.domain.repository.UserRepository
 import com.cschool.scooterrentalapp.service.RentalServiceImpl
 import com.cschool.scooterrentalapp.service.interfaces.RentalService
-import groovy.json.JsonSlurper
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.context.TestConfiguration
-import org.springframework.context.annotation.Bean
-import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.MvcResult
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
-import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import spock.lang.Specification
-import spock.mock.DetachedMockFactory
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -30,7 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 class RentalControllerTest extends Specification {
 
-    @Autowired
     private MockMvc mvc
     @Autowired
     MsgSource msgSource
@@ -65,7 +54,16 @@ class RentalControllerTest extends Specification {
         result.andExpect(status().isOk())
 
         and:
-        result.andReturn().getResponse().getContentAsString()
+        result.andReturn().getResponse().getContentAsString() == asJsonString([rental])
     }
 
+    private static String asJsonString(final Object obj) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper()
+            final String jsonContent = mapper.writeValueAsString(obj)
+            return jsonContent
+        } catch (Exception e) {
+            throw new RuntimeException(e)
+        }
+    }
 }
