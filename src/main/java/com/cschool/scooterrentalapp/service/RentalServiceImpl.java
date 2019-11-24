@@ -13,6 +13,7 @@ import com.cschool.scooterrentalapp.domain.repository.UserRepository;
 import com.cschool.scooterrentalapp.exception.CommonBadRequestException;
 import com.cschool.scooterrentalapp.exception.CommonConflictException;
 import com.cschool.scooterrentalapp.service.interfaces.RentalService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,7 @@ public class RentalServiceImpl extends AbstractCommonService implements RentalSe
     private DockStationRepository dockStationRepository;
     private RentalRepository rentalRepository;
 
+    @Autowired
     public RentalServiceImpl(MsgSource msgSource,
                              UserRepository userRepository,
                              ScooterRepository scooterRepository,

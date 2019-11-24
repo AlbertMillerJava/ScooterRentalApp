@@ -1,4 +1,6 @@
 spring:
+  messages:
+    encoding: UTF-8
   datasource:
     url: jdbc:postgresql://localhost:5432/scooter
     username: myuser
