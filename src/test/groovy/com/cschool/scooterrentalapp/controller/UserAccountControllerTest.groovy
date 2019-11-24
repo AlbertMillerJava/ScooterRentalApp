@@ -1,6 +1,5 @@
 package com.cschool.scooterrentalapp.controller
 
-import com.cschool.scooterrentalapp.ScooterRentalAppApplication
 import com.cschool.scooterrentalapp.api.request.CreateUserAccountRequest
 import com.cschool.scooterrentalapp.common.MsgSource
 import com.cschool.scooterrentalapp.domain.model.UserAccount
@@ -19,7 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup
 
-@SpringBootTest(classes = ScooterRentalAppApplication)
+@SpringBootTest
 class UserAccountControllerTest extends Specification {
 
     private MockMvc mvc

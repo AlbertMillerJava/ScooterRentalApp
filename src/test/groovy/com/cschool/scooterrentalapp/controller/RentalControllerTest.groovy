@@ -10,14 +10,14 @@ import com.cschool.scooterrentalapp.service.RentalServiceImpl
 import com.cschool.scooterrentalapp.service.interfaces.RentalService
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Specification
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-@SpringBootTest
+@ContextConfiguration(classes = MsgSource.class)
 class RentalControllerTest extends Specification {
 
     private MockMvc mvc
@@ -42,12 +42,12 @@ class RentalControllerTest extends Specification {
         mvc = standaloneSetup(rentalController).build()
     }
 
-    def "when get all rental should return empty list"() {
+    def "when get all rental should return list with one rental"() {
         given:
         def rental = Rental.builder().id(1).build()
         1 * rentalRepository.findAll() >> [rental]
-        when:
 
+        when:
         def result = mvc.perform(get("/rental/getAllRentals"))
 
         then:
